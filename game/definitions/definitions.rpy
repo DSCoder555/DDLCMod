@@ -18,30 +18,6 @@ python early:
     import singleton
     me = singleton.SingleInstance()
 
-init -3 python:
-    ## Dynamic Super Position (DSP)
-    # DSP is a feature in where the game upscales the positions of assets 
-    # with higher resolutions (1080p).
-    # This is just simple division from Adobe, implemented in Python.
-    def dsp(orig_val):
-        ceil = not isinstance(orig_val, float)
-        dsp_scale = config.screen_width / 1280.0 
-        if ceil: return math.ceil(orig_val * dsp_scale)
-        # since `absolute * float` -> `float`
-        # we wanna keep the same type
-        return type(orig_val)(orig_val * dsp_scale)
-    
-    # This makes evaluating the value faster
-    renpy.pure(dsp)
-
-    ## Dynamic Super Resolution
-    # DSR is a feature in where the game upscales asset sizes to higher
-    # resolutions (1080p) and sends back a modified transform.
-    # (Recommend that you just make higher res assets than upscale lower res ones)
-    def dsr(path):
-        img_bounds = renpy.image_size(path)
-        return Transform(path, size=(dsp(img_bounds[0]), dsp(img_bounds[1])))
-
 # This init python statement sets up the functions, keymaps and channels
 # for the game.
 init python:
@@ -309,7 +285,7 @@ image glitch_color2:
 # This is where the characters bodies and faces are defined in the mod.
 # They are defined by a left half, a right half and their head.
 # To define a new image, declare a new image statement like in this example:
-#     image sayori 1ca = im.Composite((960, 960), (0, 0), "mod_assets/sayori/1cl.png", (0, 0), "mod_assets/sayori/1cr.png", (0, 0), "sayori/a.png")
+#     image sayori 1ca = Composite((960, 960), (0, 0), "mod_assets/sayori/1cl.png", (0, 0), "mod_assets/sayori/1cr.png", (0, 0), "sayori/a.png")
 
 # Sayori's Character Definitions
 image sayori 1 = im.Composite((960, 960), (0, 0), "sayori/1l.png", (0, 0), "sayori/1r.png", (0, 0), "sayori/a.png")
@@ -868,7 +844,7 @@ image natsuki 5 = im.Composite((960, 960), (18, 22), "natsuki/1t.png", (0, 0), "
 
 # This image shows the realistic mouth on Natsuki on a random playthrough
 # of Act 2.
-image natsuki mouth = LiveComposite((960, 960), (0, 0), "natsuki/0.png", (390, 340), "n_rects_mouth", (480, 334), "n_rects_mouth")
+image natsuki mouth = im.Composite((960, 960), (0, 0), "natsuki/0.png", (390, 340), "n_rects_mouth", (480, 334), "n_rects_mouth")
 
 # This image shows black rectangles on Natsuki on a random playthrough
 # of Act 2.
@@ -1178,7 +1154,7 @@ image yuri stab_2 = "yuri/stab/2.png"
 image yuri stab_3 = "yuri/stab/3.png"
 image yuri stab_4 = "yuri/stab/4.png"
 image yuri stab_5 = "yuri/stab/5.png"
-image yuri stab_6 = LiveComposite((960,960), (0, 0), "yuri/stab/6-mask.png", (0, 0), "yuri stab_6_eyes", (0, 0), "yuri/stab/6.png")
+image yuri stab_6 = im.Composite((960,960), (0, 0), "yuri/stab/6-mask.png", (0, 0), "yuri stab_6_eyes", (0, 0), "yuri/stab/6.png")
 
 # This image transform animates Yuri's eyes on her 6th stabbing in Act 2.
 image yuri stab_6_eyes:
@@ -1209,7 +1185,7 @@ image yuri stab_6_eyes:
 
 # These images shows Yuri with a offcenter right eye moving slowing away
 # from her face.
-image yuri oneeye = LiveComposite((960, 960), (0, 0), "yuri/1l.png", (0, 0), "yuri/1r.png", (0, 0), "yuri/oneeye.png", (0, 0), "yuri oneeye2")
+image yuri oneeye = im.Composite((960, 960), (0, 0), "yuri/1l.png", (0, 0), "yuri/1r.png", (0, 0), "yuri/oneeye.png", (0, 0), "yuri oneeye2")
 image yuri oneeye2:
     "yuri/oneeye2.png"
     subpixel True
@@ -1241,7 +1217,7 @@ image yuri glitch2:
     "yuri 1"
 
 # These image declarations show Yuri's moving eyes in Act 2.
-image yuri eyes = LiveComposite((1280, 720), (0, 0), "yuri/eyes1.png", (0, 0), "yuripupils")
+image yuri eyes = im.Composite((1280, 720), (0, 0), "yuri/eyes1.png", (0, 0), "yuripupils")
 
 # This image shows the base of Yuri's sprite as her eyes move.
 image yuri eyes_base = "yuri/eyes1.png"
@@ -1423,6 +1399,8 @@ define s = DynamicCharacter('s_name', image='sayori', what_prefix='"', what_suff
 define m = DynamicCharacter('m_name', image='monika', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define n = DynamicCharacter('n_name', image='natsuki', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define y = DynamicCharacter('y_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define h = DynamicCharacter('h_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
+define r = DynamicCharacter('r_name', image='yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 define ny = Character('Nat & Yuri', what_prefix='"', what_suffix='"', ctc="ctc", ctc_position="fixed")
 
 # This variable determines whether to allow the player to dismiss pauses.
