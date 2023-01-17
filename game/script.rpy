@@ -23,9 +23,12 @@ label start:
     #   $ mi_name = "Mike". 
     # Don't forget to add the character to 'definitions.rpy'!
     $ s_name = "???"
-    $ m_name = "Girl 3"
+    $ m_name = "Ammaar's crush"
     $ n_name = "Girl 2"
-    $ y_name = "Girl 1"
+    $ y_name = "Yuri"
+    $ h_name = "Man"
+    $ r_name = "Mysterious Driver"
+    $ mc = "Player"
 
     # This variable controls whether the quick menu in the textbox is enabled.
     $ quick_menu = True
@@ -45,12 +48,13 @@ label start:
     ## The Main Part of the Script
     # This is where your script code is called!
     # 'persistent.playthrough' controls the playthrough number the player is on i.e (Act 1, 2, 3, 4)
-
+    
     # REMOVE THIS LINE WHEN YOU HAVE MADE A STORY SCRIPT FILE AND CALLED IT HERE
-    call screen dialog(message="It seems that you are trying to run the mod template as a new game with no story.\nThis is a template, not an actual mod. Please code a story for your mod, call it in \'script.rpy\', and try again.", ok_action=MainMenu(confirm=False))
+    call story
 
     ## Example on calling scripts from DDLC.
     # if persistent.playthrough == 0:
+
     #     # This variable sets the chapter number to X depending on the chapter
     #     # your player is experiencing ATM.
     #     $ chapter = 0
@@ -92,10 +96,7 @@ label start:
     #     # This python statement writes a file from within the game to the game folder
     #     # or to the Android/data/[modname]/files/game folder.
     #     python:
-    #         if renpy.android and renpy.version_tuple == (6, 99, 12, 4, 2187):
-    #             try: file(os.environ['ANDROID_PUBLIC'] + "/hxppy thxughts.png")
-    #             except IOError: open(os.environ['ANDROID_PUBLIC'] + "/hxppy thxughts.png", "wb").write(renpy.file("hxppy thxughts.png").read())
-    #         elif renpy.android:
+    #         if renpy.android:
     #             try: renpy.file(os.environ['ANDROID_PUBLIC'] + "/hxppy thxughts.png")
     #             except IOError: open(os.environ['ANDROID_PUBLIC'] + "/hxppy thxughts.png", "wb").write(renpy.file("hxppy thxughts.png").read())
     #         else:
@@ -126,10 +127,7 @@ label start:
     #         call poem
 
     #         python:
-    #             if renpy.android and renpy.version_tuple == (6, 99, 12, 4, 2187):
-    #                 try: file(os.environ['ANDROID_PUBLIC'] + "/CAN YOU HEAR ME.txt")
-    #                 except IOError: open(os.environ['ANDROID_PUBLIC'] + "/CAN YOU HEAR ME.txt", "wb").write(renpy.file("CAN YOU HEAR ME.txt").read())
-    #             elif renpy.android:
+    #             if renpy.android:
     #                 try: renpy.file(os.environ['ANDROID_PUBLIC'] + "/CAN YOU HEAR ME.txt")
     #                 except IOError: open(os.environ['ANDROID_PUBLIC'] + "/CAN YOU HEAR ME.txt", "wb").write(renpy.file("CAN YOU HEAR ME.txt").read())
     #             else:
@@ -146,10 +144,7 @@ label start:
     #         call poem(False)
 
     #         python:
-    #             if renpy.android and renpy.version_tuple == (6, 99, 12, 4, 2187):
-    #                 try: file(os.environ['ANDROID_PUBLIC'] + "/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt")
-    #                 except IOError: open(os.environ['ANDROID_PUBLIC'] + "/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt", "wb").write(renpy.file("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt").read())
-    #             elif renpy.android:
+    #             if renpy.android:
     #                 try: renpy.file(os.environ['ANDROID_PUBLIC'] + "/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt")
     #                 except IOError: open(os.environ['ANDROID_PUBLIC'] + "/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt", "wb").write(renpy.file("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt").read())
     #             else:
